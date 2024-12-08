@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/Components/ui/calendar";
 
 export default function Log() {
   const [date, setDate] = useState(new Date());
