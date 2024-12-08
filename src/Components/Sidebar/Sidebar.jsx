@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 w-64 h-screen bg-white shadow-md flex flex-col px-6 py-5">
       <div className="flex items-center mb-5">
-        <img className="h-16 w-auto" src="/public/logo.svg" alt="Logo" />
+        <img className="h-16 w-auto" src="/logo.svg" alt="Logo" />
       </div>
       <hr className="border-t border-gray-300 w-full" />
 

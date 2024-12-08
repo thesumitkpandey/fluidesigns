@@ -8,7 +8,7 @@ export default function Profile() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <img
-              src="/public/person.jpg"
+              src="/person.jpg"
               alt="Profile"
               className="w-12 h-12 rounded-full"
             />
