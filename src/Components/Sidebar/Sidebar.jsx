@@ -1,26 +1,33 @@
 import React from "react";
 import { SidebarElement } from "./SidebarElement";
-import logo from "../../../public/logo.svg";
-import { IoHome } from "react-icons/io5";
-import { FaCalendarDay } from "react-icons/fa";
-import { FaCalendarDays } from "react-icons/fa6";
-import { BiSolidDetail } from "react-icons/bi";
+import { CiHome } from "react-icons/ci";
+import { CiCalendar } from "react-icons/ci";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { BiDetail } from "react-icons/bi";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { MdOutlineHelpOutline } from "react-icons/md";
 import { LuLogOut } from "react-icons/lu";
-export default function ({ name }) {
-  return (
-    <div className="w-64  h-screen flex flex-col p-5">
-      <div className="flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded cursor-pointer mb-5">
-        <img className="h-full w-full" src={logo} alt="Logo" />
-      </div>
 
+export default function Sidebar() {
+  return (
+    <aside className="fixed left-0 top-0 w-64 h-screen bg-white shadow-md flex flex-col px-6 py-5">
+      {/* Logo Section */}
+      <div className="flex items-center mb-5">
+        <img
+          className="h-16 w-auto"
+          src="/logo.svg" // Replace with your logo path
+          alt="Logo"
+        />
+      </div>
+      <hr className="border-t border-gray-300 w-full" />
+
+      {/* Navigation Section */}
       <nav className="flex-grow">
         <ul className="space-y-3">
-          <SidebarElement name="Home" symbol={<IoHome />} />
-          <SidebarElement name="My Attendance" symbol={<FaCalendarDay />} />
-          <SidebarElement name="My Leaves" symbol={<FaCalendarDays />} />
-          <SidebarElement name="Company Details" symbol={<BiSolidDetail />} />
+          <SidebarElement name="Home" symbol={<CiHome />} />
+          <SidebarElement name="My Attendance" symbol={<CiCalendar />} />
+          <SidebarElement name="My Leaves" symbol={<FaRegCalendarAlt />} />
+          <SidebarElement name="Company Details" symbol={<BiDetail />} />
           <SidebarElement
             name="Profile & Settings"
             symbol={<RiUserSettingsLine />}
@@ -28,14 +35,17 @@ export default function ({ name }) {
         </ul>
       </nav>
 
-      {/* Additional Buttons */}
-      <nav className="space-y-3">
-        <SidebarElement
-          name="Help & Support"
-          symbol={<MdOutlineHelpOutline />}
-        />
-        <SidebarElement name="Contact Us" symbol={<LuLogOut />} />
+      {/* Footer Section */}
+      <nav className="mt-5">
+        <hr className="border-t border-gray-300 mb-4" />
+        <ul className="space-y-3">
+          <SidebarElement
+            name="Help & Support"
+            symbol={<MdOutlineHelpOutline />}
+          />
+          <SidebarElement name="Logout" symbol={<LuLogOut />} />
+        </ul>
       </nav>
-    </div>
+    </aside>
   );
 }
