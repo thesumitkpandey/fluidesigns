@@ -11,17 +11,11 @@ import { LuLogOut } from "react-icons/lu";
 export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 w-64 h-screen bg-white shadow-md flex flex-col px-6 py-5">
-      {/* Logo Section */}
       <div className="flex items-center mb-5">
-        <img
-          className="h-16 w-auto"
-          src="/logo.svg" // Replace with your logo path
-          alt="Logo"
-        />
+        <img className="h-16 w-auto" src="/public/logo.svg" alt="Logo" />
       </div>
       <hr className="border-t border-gray-300 w-full" />
 
-      {/* Navigation Section */}
       <nav className="flex-grow">
         <ul className="space-y-3">
           <SidebarElement name="Home" symbol={<CiHome />} />
@@ -35,7 +29,6 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      {/* Footer Section */}
       <nav className="mt-5">
         <hr className="border-t border-gray-300 mb-4" />
         <ul className="space-y-3">

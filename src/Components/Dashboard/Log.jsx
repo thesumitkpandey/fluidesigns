@@ -4,26 +4,28 @@ import { Calendar } from "@/components/ui/calendar";
 export default function Log() {
   const [date, setDate] = useState(new Date());
   const [activeLog, setActiveLog] = useState("Attendance Log");
-  const [rowsToShow, setRowsToShow] = useState(8); // Initially show 8 rows
+  const [rowsToShow, setRowsToShow] = useState(8);
 
   const attendanceLogData = [
     ["John Doe", "9:00 AM", "5:00 PM", "Present", "01/01/2024"],
-    // ...more attendance data
   ];
 
   const leaveLogData = [
-    ["Sick Leave", "5/05/2024", "5/10/2024", 5, "Not feeling well", "Approved"],
-    // ...more leave data
+    ["Casual Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Approved"],
+    ["Sick Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Rejected"],
+    ["Casual Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Approved"],
+    ["Casual Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Rejected"],
+    ["Paid leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Rejected"],
+    ["Casual Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Rejected"],
+    ["Sick Leave", "29-09-2024", "30-09-2024", "01", "Wedding", "Rejected"],
   ];
 
   const holidayData = [
-    ["New Year", "01/01/2025"],
-    ["Republic Day", "26/01/2025"],
-    ["Holi", "08/03/2025"],
-    ["Good Friday", "18/04/2025"],
-    ["Independence Day", "15/08/2025"],
-    ["Diwali", "12/11/2025"],
-    ["Christmas", "25/12/2025"],
+    ["1 Jan, Mon", "New Year(O)"],
+    ["14 Jan, Thru", "Makar Sankranti"],
+    ["15 Mar, Fri", "Holi"],
+    ["30 Mar,Fri", "Gudi Padwa(O)"],
+    ["18 Apr, Mon", "Good Friday"],
   ];
 
   const columnsAttendance = [
@@ -41,13 +43,12 @@ export default function Log() {
     activeLog === "Attendance Log" ? columnsAttendance : columnsLeave;
 
   const handleViewMore = () => {
-    setRowsToShow(tableData.length); // Show all rows when clicked
+    setRowsToShow(tableData.length);
   };
 
   return (
     <div className="mt-6 grid grid-cols-3 gap-4 items-start">
       <section className="col-span-2 bg-white p-4 rounded-lg shadow flex flex-col h-[500px]">
-        {/* Attendance/Leave Log Section */}
         <div className="flex items-center justify-start mb-4">
           <div className="flex bg-gray-200 rounded-lg shadow divide-x divide-gray-300">
             <button
@@ -69,7 +70,6 @@ export default function Log() {
           </div>
         </div>
 
-        {/* Table */}
         <div className="flex-grow">
           <table className="w-full bg-white rounded-lg shadow overflow-hidden">
             <thead className="bg-gray-300 text-gray-800">
@@ -88,7 +88,18 @@ export default function Log() {
                   className={rowIndex % 2 === 0 ? "bg-gray-100" : "bg-white"}
                 >
                   {row.map((cell, cellIndex) => (
-                    <td key={cellIndex} className="p-2">
+                    <td
+                      key={cellIndex}
+                      className={`p-2 ${
+                        columns[cellIndex] === "Status"
+                          ? cell === "Approved"
+                            ? "text-green-500"
+                            : cell === "Rejected"
+                            ? "text-red-500"
+                            : ""
+                          : ""
+                      }`}
+                    >
                       {cell}
                     </td>
                   ))}
@@ -98,7 +109,6 @@ export default function Log() {
           </table>
         </div>
 
-        {/* View More (Underlined Text) */}
         {tableData.length > 8 && rowsToShow < tableData.length && (
           <div className="flex justify-center mt-4">
             <span
@@ -110,36 +120,40 @@ export default function Log() {
           </div>
         )}
       </section>
-
-      {/* Calendar Section (Right) */}
-      <section className="bg-white p-4 rounded-lg shadow flex flex-col">
-        <div className="w-full">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border w-full h-full"
-          />
-        </div>
-
-        {/* Holiday Section */}
-        <div className="mt-4 bg-white rounded-lg shadow p-4 w-full">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">Holidays (2025)</h2>
-            <span className="text-blue-500 cursor-pointer hover:underline">
-              View All
-            </span>
+      <div className="flex flex-col">
+        <section className="bg-white p-4 rounded-lg shadow flex flex-col">
+          <div className="w-full">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="rounded-md border w-full h-full"
+            />
           </div>
-          <div>
-            {holidayData.map(([holiday, date], index) => (
-              <div key={index} className="flex justify-between mb-2">
-                <span>{holiday}</span>
-                <span>{date}</span>
-              </div>
-            ))}
+        </section>
+        <section>
+          <div className="mt-4 bg-white rounded-lg shadow p-4 w-full">
+            <div className="flex justify-between items-center mb-4 text-xl">
+              <h2 className=" font-semibold">Holidays (2025)</h2>
+              <span className="text-blue-500 cursor-pointer hover:underline">
+                View All
+              </span>
+            </div>
+            <hr className="border-t border-gray-300 my-4" />
+            <div>
+              {holidayData.map(([holiday, date], index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center py-3 text-base"
+                >
+                  <span className="">{holiday}</span>
+                  <span className=" text-gray-600">{date}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
